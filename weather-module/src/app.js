@@ -12,7 +12,7 @@ import { WeatherDataFetcher } from './weatherDataFetcher.js'
  *
  * @param {string} city The input city to fetch.
  * @param {string} country The input country to fetch.
- * @returns {string} TReturn the average temperature, humidity, wind speed, temperature to celsius.
+ * @returns {string} Return the average temperature, temperature to celsius ,humidity, and wind speed.
  */
 export const main = async (city, country) => {
   try {
@@ -21,7 +21,6 @@ export const main = async (city, country) => {
 
     const coordinates = await weatherFetcher.getCoordinates(city, country)
     const weatherData = await weatherFetcher.fetchWeatherData(coordinates.lat, coordinates.lon)
-    console.log(weatherData)
 
     // Save corresponding to an array and sent it to corresponding function.
     const weatherDataList = weatherData.list
@@ -32,19 +31,18 @@ export const main = async (city, country) => {
 
     const weatherModule = new WeatherModule(temperaturesInKelvin, humidities, windSpeeds, rainfall)
 
-    const averageTemperatureInCelsius = await weatherModule.countAverageTemperature(temperaturesInKelvin)
-    console.log('The average temperature in kelvin for the next 40 days is about: ' + averageTemperatureInCelsius)
+    const averageTemperature = await weatherModule.countAverageTemperature(temperaturesInKelvin)
+
+    const averageTemperatureInCelsius = await weatherModule.convertKelvinToCelsius(averageTemperature)
 
     const averageHumidity = await weatherModule.countAverageHumidity(humidities)
-    console.log('The average humidity for the next 40 days is about is about: ' + averageHumidity)
 
     const averageWindSpeed = await weatherModule.countAverageWindSpeed(windSpeeds)
-    console.log('The average wind speed for the next 40 days is about is about is about: ' + averageWindSpeed)
 
     const maxRainfall = await weatherModule.countMaximumRainfall(rainfall)
-    console.log('The maximum rainfall for the next 40 days is about: ' + maxRainfall + 'mm')
 
     return {
+      averageTemperature,
       averageTemperatureInCelsius,
       averageHumidity,
       averageWindSpeed,

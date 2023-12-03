@@ -20,12 +20,21 @@ export class WeatherDataFetcher {
    * @returns {object} The city's coordinate.
    */
   async getCoordinates (country, city) {
-    const response = await fetch(`${this.baseUrl}/geo/1.0/direct?q=${city},${country}&limit=1&appid=${this.apiKey}`)
-    const data = await response.json()
-    if (!response.ok || data.length === 0) {
-      throw new Error('City not found or invalid country code')
+    try {
+      const response = await fetch(`${this.baseUrl}/geo/1.0/direct?q=${city},${country}&limit=1&appid=${this.apiKey}`)
+      if (!response.ok) {
+        throw new Error(`Error fetching coordinates: ${response.status} ${response.statusText}`)
+      }
+      const data = await response.json()
+      if (data.length === 0) {
+        throw new Error('City not found or invalid country code')
+      }
+      return data[0]
+    } catch (error) {
+      // Log and handle the error
+      console.error('Error getting coordinates:', error)
+      throw error
     }
-    return data[0]
   }
 
   /**
@@ -36,11 +45,16 @@ export class WeatherDataFetcher {
    * @returns {object} The weather data.
    */
   async fetchWeatherData (lat, lon) {
-    const response = await fetch(`${this.baseUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${this.apiKey}`)
-    if (!response.ok) {
-      throw new Error(`Error fetching weather data: ${response.statusText}`)
+    try {
+      const response = await fetch(`${this.baseUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${this.apiKey}`)
+      if (!response.ok) {
+        throw new Error(`Error fetching weather data: ${response.status} ${response.statusText}`)
+      }
+      const data = await response.json()
+      return data
+    } catch (error) {
+      console.error('Error fetching weather data:', error)
+      throw error
     }
-    const data = await response.json()
-    return data
   }
 }
