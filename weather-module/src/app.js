@@ -12,13 +12,16 @@ import { WeatherDataFetcher } from './weatherDataFetcher.js'
  *
  * @param {string} city The input city to fetch.
  * @param {string} country The input country to fetch.
+ * @param {string} apiKey The input api key.
  * @returns {string} Return the average temperature, temperature to celsius ,humidity, and wind speed.
  */
-export const main = async (city, country) => {
-  try {
-    const apiKey = '677d6e7a6780b8cf980ba095587ac1d3'
-    const weatherFetcher = new WeatherDataFetcher(apiKey)
+export const main = async (city, country, apiKey) => {
+  if (!city || !country || !apiKey) {
+    throw new Error('City name and country code and api key are required.')
+  }
 
+  try {
+    const weatherFetcher = new WeatherDataFetcher(apiKey)
     const coordinates = await weatherFetcher.getCoordinates(city, country)
     const weatherData = await weatherFetcher.fetchWeatherData(coordinates.lat, coordinates.lon)
 
@@ -50,7 +53,6 @@ export const main = async (city, country) => {
     }
   } catch (error) {
     console.error(error.message)
+    throw error
   }
 }
-
-main()
