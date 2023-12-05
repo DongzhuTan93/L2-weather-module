@@ -21,18 +21,36 @@ export class WeatherDataFetcher {
    */
   async getCoordinates (country, city) {
     try {
-      const response = await fetch(`${this.baseUrl}/geo/1.0/direct?q=${city},${country}&limit=1&appid=${this.apiKey}`)
-      if (!response.ok) {
-        throw new Error(`Error fetching coordinates: ${response.status} ${response.statusText}`)
+      if (!city || !country) {
+        throw new Error('City and country must be provided')
       }
+
+      if (!this.apiKey) {
+        throw new Error('No API key found')
+      }
+
+      const url = `${this.baseUrl}/geo/1.0/direct?q=${encodeURIComponent(city)},${encodeURIComponent(country)}&limit=1&appid=${this.apiKey}`
+      const response = await fetch(url)
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch coordinates: Status code ${response.status}`)
+      }
+
       const data = await response.json()
+
       if (data.length === 0) {
         throw new Error('City not found or invalid country code')
       }
-      return data[0]
+
+      const matchedLocation = data.find(location => location.name.toLowerCase() === city.toLowerCase() && location.country.toLowerCase() === country.toLowerCase())
+
+      if (!matchedLocation) {
+        throw new Error(`No matching location found for ${city}, ${country}`)
+      }
+
+      return { lat: matchedLocation.lat, lon: matchedLocation.lon }
     } catch (error) {
-      // Log and handle the error
-      console.error('Error getting coordinates:', error)
+      console.error('Error fetching coordinates:', error)
       throw error
     }
   }

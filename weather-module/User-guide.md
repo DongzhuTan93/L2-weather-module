@@ -1,4 +1,7 @@
-## Weather-moudle user's guidance
+## Weather-module user's guide
+
+### programming language:
+JavaScript
 
 #### This Weather-Module enables you to easily integrate weather data fetching capabilities into your application. It allows you to retrieve and compute various weather-related data such as average temperature, humidity, wind speed, and maximum rainfall forecasts for the next 40 days, using data from OpenWeatherMap API.
 
