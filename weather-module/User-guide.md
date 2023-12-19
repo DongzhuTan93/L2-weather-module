@@ -28,3 +28,5 @@ const weatherResults = await main(city, country, apiKey)
 
 console.log('Weather Results:', weatherResults)
 
+### The data obtained is roughly like this:
+![example picture](./pictures/example.png)
