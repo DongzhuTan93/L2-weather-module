@@ -3,8 +3,11 @@
 The "Weather Module" has been tested using automated testing to verify that its functions produce the expected results. Each function was executed with predefined input data, and the outputs were automatically compared to the expected values. The tests covered calculations for average temperature, humidity calculations, wind speed, and maximum rainfall detection.
 
 ## Test Execution
-Command used: npm run test:module
-The tests were executed using the above command, which runs all defined test cases for the module.
+Command used: `npm run test:module`
+- The tests were executed using the above command, which runs all defined test cases for the module.
+
+## Test result
+![Test result](Test-result.png)
 
 ## Automated Test Cases
 ### Test Case ID: TC1
@@ -16,7 +19,7 @@ The tests were executed using the above command, which runs all defined test cas
 - temperaturesInKelvin: `[173.15, 273.15, 400.15, 200]`
 
 **Steps**:
-1. Call the `countAverageTemperature` and `averageTemperatureInCelsiusmethod` method of the `WeatherModule` instance with the input data.
+1. Call the `countAverageTemperature` and `convertKelvinToCelsius` method of the `WeatherModule` instance with the input data.
 2. Observe the returned value.
 
 **Expected Result**:
@@ -35,7 +38,7 @@ The tests were executed using the above command, which runs all defined test cas
 - humidities: `[4, 6, 2, 8, 7]`
 
 **Steps**:
-1. Call the `averageHumidity` method of the `WeatherModule` instance with the input data.
+1. Call the `countAverageHumidity` method of the `WeatherModule` instance with the input data.
 2. Observe the returned value.
 
 **Expected Result**:
@@ -54,7 +57,7 @@ The tests were executed using the above command, which runs all defined test cas
 - windSpeeds: `[1, 5, 2, 3]`
 
 **Steps**:
-1. Call the `averageWindSpeed` method of the `WeatherModule` instance with the input data.
+1. Call the `countAverageWindSpeed` method of the `WeatherModule` instance with the input data.
 2. Observe the returned value.
 
 **Expected Result**:
@@ -73,7 +76,7 @@ The tests were executed using the above command, which runs all defined test cas
 - rainfall: `[2, 5, 7, 9, 2, 4]`
 
 **Steps**:
-1. Call the `maxRainfall` method of the `WeatherModule` instance with the input data.
+1. Call the `countMaximumRainfall` method of the `WeatherModule` instance with the input data.
 2. Observe the returned value.
 
 **Expected Result**:
