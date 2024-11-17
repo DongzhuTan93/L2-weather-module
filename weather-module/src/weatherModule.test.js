@@ -27,7 +27,7 @@ const runWeatherModuleTests = () => {
   /**
    * Test average temperature calculation.
    */
-  const testAverageTemperature = () => {
+  const testAverageTemperatureCalculation = () => {
     const expectedKelvin = 261.6
     const actualKelvin = Number(weatherModule.countAverageTemperature().toFixed(1))   // Keep one round to one decimal place, convert string back to number after toFixed().
     const actualCelsius = Number(weatherModule.convertKelvinToCelsius(actualKelvin))
@@ -47,7 +47,7 @@ const runWeatherModuleTests = () => {
   /**
    * Test average humidity calculation.
    */
-  const testAverageHumidity = () => {
+  const testAverageHumidityCalculation = () => {
     const expected = 5.4
     const actual = weatherModule.countAverageHumidity()
 
@@ -65,7 +65,7 @@ const runWeatherModuleTests = () => {
   /**
    * Test wind speed calculation.
    */
-  const testWindSpeed = () => {
+  const testWindSpeedCalculation = () => {
     const expected = 2.8
     const actual = weatherModule.countAverageWindSpeed()
 
@@ -83,7 +83,7 @@ const runWeatherModuleTests = () => {
   /**
    * Test maximum rainfall calculation.
    */
-  const testMaxRainfall = () => {
+  const testMaxRainfallCalculation = () => {
     const expected = 9
     const actual = weatherModule.countMaximumRainfall()
 
