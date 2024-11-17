@@ -99,10 +99,10 @@ const runWeatherModuleTests = () => {
   }
 
   console.log('\n----------------------- WeatherModule Test Results -----------------------\n')
-  testAverageTemperature()
-  testAverageHumidity()
-  testWindSpeed()
-  testMaxRainfall()
+  testAverageTemperatureCalculation()
+  testAverageHumidityCalculation()
+  testWindSpeedCalculation()
+  testMaxRainfallCalculation()
   console.log('\n-----------------------')
 }
 
